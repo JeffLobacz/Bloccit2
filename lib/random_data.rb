@@ -2,7 +2,7 @@ module RandomData
 
   def random_paragraph
     sentences = []
-    rand(3..5).times do
+    rand(4..6).times do
       sentences << random_sentence
     end
 

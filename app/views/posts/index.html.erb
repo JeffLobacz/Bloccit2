@@ -1,9 +1,16 @@
 <h1>All Posts</h1>
+<% count = 0 %>
 <% @posts.each do |post| %>
   <div class="media">
     <div class="media-body">
       <h4 class="media-heading">
-        <%= link_to post.title, post %>
+          <% count += 1 %>
+          <% if count == 5 %>
+            <h4>(SPAM)</h4>
+            <% count = 0 %>
+          <% else %>
+            <%= link_to post.title, post %>
+          <% end %>
       </h4>
     </div>
   </div>

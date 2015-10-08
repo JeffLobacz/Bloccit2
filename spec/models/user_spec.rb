@@ -38,34 +38,18 @@ RSpec.describe User, type: :model do
   # methods
   describe "format_name" do
 
-<<<<<<< HEAD
     let(:user1) { User.create!(name: "bloccit user", email: "user@bloccit.com", password: "password") }
-
-    # before do
-    #   user1 = User.new(name: "bloccit user", email: "user@bloccit.com", password: "password")
-    #   # user2 = User.new(name: "bloccit", email: "user@bloccit.com", password: "password")
-    # end
-=======
-    let(:user1) { User.new(name: "bloccit user", email: "user@bloccit.com", password: "password") }
-    let(:user2) { User.new(name: "bloccit", email: "user@bloccit.com", password: "password") }
->>>>>>> master
+    let(:user2) { User.create!(name: "bloccit", email: "user@bloccit.com", password: "password") }
 
     it "capitalizes names with more than one word" do
       user1.save
       expect(user1.name).to eq("Bloccit User")
     end
 
-<<<<<<< HEAD
-    # it "capitalizes a one-word name" do
-    #   user2.save
-    #   expect(user2.name).to eq("Bloccit")
-    # end
-=======
     it "capitalizes a one-word name" do
       user2.save
       expect(user2.name).to eq("Bloccit")
     end
->>>>>>> master
 
   end
 

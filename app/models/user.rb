@@ -1,16 +1,10 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
 
-<<<<<<< HEAD
-  before_save { self.name = name.my_cap }
-
-  def my_cap
-=======
   before_save { self.name = self.my_cap }
 
   def my_cap
     array = []
->>>>>>> master
     array = name.split
     array.each do |f|
       f.capitalize!

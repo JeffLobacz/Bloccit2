@@ -32,25 +32,27 @@ RSpec.describe User, type: :model do
 
   end
 
-  #methods
-  # describe "format_name" do
-  #
-  #   before do
-  #     user1 = User.new(name: "bloccit user", email: "user@bloccit.com", password: "password")
-  #     user2 = User.new(name: "bloccit", email: "user@bloccit.com", password: "password")
-  #   end
-  #
-  #   it "capitalizes names with more than one word" do
-  #     user1.save
-  #     expect(user1.name).to eq("Bloccit User")
-  #   end
-  #
-  #   it "capitalizes a one-word name" do
-  #     user2.save
-  #     expect(user2.name).to eq("Bloccit")
-  #   end
-  
-  # end
+  # methods
+  describe "format_name" do
+
+    let(:user1) { User.create!(name: "bloccit user", email: "user@bloccit.com", password: "password") }
+
+    # before do
+    #   user1 = User.new(name: "bloccit user", email: "user@bloccit.com", password: "password")
+    #   # user2 = User.new(name: "bloccit", email: "user@bloccit.com", password: "password")
+    # end
+
+    it "capitalizes names with more than one word" do
+      user1.save
+      expect(user1.name).to eq("Bloccit User")
+    end
+
+    # it "capitalizes a one-word name" do
+    #   user2.save
+    #   expect(user2.name).to eq("Bloccit")
+    # end
+
+  end
 
   describe "invalid user" do
     let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }

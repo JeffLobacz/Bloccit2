@@ -10,7 +10,10 @@ RSpec.describe User, type: :model do
 
   # Shoulda tests for email
   it { should validate_presence_of(:email) }
-  it { should validate_uniqueness_of(:email) }
+  it {
+     allow(user).to receive(:my_cap)
+     should validate_uniqueness_of(:email)
+   }
   it { should validate_length_of(:email).is_at_least(3) }
   it { should allow_value("user@bloccit.com").for(:email) }
   it { should_not allow_value("userbloccit.com").for(:email) }
@@ -32,25 +35,23 @@ RSpec.describe User, type: :model do
 
   end
 
-  #methods
-  # describe "format_name" do
-  #
-  #   before do
-  #     user1 = User.new(name: "bloccit user", email: "user@bloccit.com", password: "password")
-  #     user2 = User.new(name: "bloccit", email: "user@bloccit.com", password: "password")
-  #   end
-  #
-  #   it "capitalizes names with more than one word" do
-  #     user1.save
-  #     expect(user1.name).to eq("Bloccit User")
-  #   end
-  #
-  #   it "capitalizes a one-word name" do
-  #     user2.save
-  #     expect(user2.name).to eq("Bloccit")
-  #   end
-  
-  # end
+  # methods
+  describe "format_name" do
+
+    let(:user1) { User.new(name: "bloccit user", email: "user@bloccit.com", password: "password") }
+    let(:user2) { User.new(name: "bloccit", email: "user@bloccit.com", password: "password") }
+
+    it "capitalizes names with more than one word" do
+      user1.save
+      expect(user1.name).to eq("Bloccit User")
+    end
+
+    it "capitalizes a one-word name" do
+      user2.save
+      expect(user2.name).to eq("Bloccit")
+    end
+
+  end
 
   describe "invalid user" do
     let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
@@ -65,7 +66,7 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
 
-      it "should be an invalid user due to incorrectly formatted email address" do
+    it "should be an invalid user due to incorrectly formatted email address" do
       expect(user_with_invalid_email_format).to_not be_valid
     end
 

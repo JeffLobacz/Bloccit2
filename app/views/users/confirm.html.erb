@@ -2,23 +2,17 @@
 <div class="jumbotron">
   <h1>Sign Up Confirmation</h1>
   <p>Are you sure these values are correct?</p>
+  <br>
+  <p>Email: <%= @user.email %></p>
   <p>
-    <%= link_to "Yes", new_user_path, class: 'btn btn-success' %>
-    <%= link_to "No", new_user_path, class: 'btn btn-success' %>
-  </p>
-</div>
+  <p>Name: <%= @user.name %></p>
+  <br>
 
-<!-- <div class="row">
-  <div class="col-md-4">
-    <h2>Solves world hunger</h2>
-    <p>Bloccit will deliver food and water to those in need, all over the world.</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Eliminates poverty</h2>
-    <p>Bloccit will deliver money and education to those in need, all over the world.</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Makes you better looking</h2>
-    <p>Bloccit will make you better looking: it's scientifically proven to make men look like Ryan Gosling and women look like Shakira.</p>
-  </div>
-</div> -->
+    <div class="btn-group">
+    <button class="btn btn-success" type="button"><%= link_to "Yes", {:controller => "users", :action => "create", :params => params}, method: :post, style: 'color:whitesmoke;' %></button>
+    <!-- <button class="btn btn-danger" type="button"><%= link_to "No", new_user_path, style: 'color:whitesmoke;' %></button> -->
+    <button class="btn btn-danger" type="button"><%= link_to "No", {:controller => "users", :action => "new", :params => params}, method: :post, style: 'color:whitesmoke;' %></button>
+
+    </div>
+
+</div>

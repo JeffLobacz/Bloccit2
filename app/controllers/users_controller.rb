@@ -2,6 +2,9 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    
   end
 
   def create
@@ -12,7 +15,7 @@ class UsersController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
 
     if @user.save
-      flash[:notice] = "Welcome to Bloccit #{@user.name}!"
+      flash[:notice] = "Welcome to Bloccit, #{@user.name}!"
       redirect_to root_path
     else
       flash[:error] = "There was an error creating your account. Please try again."
@@ -22,9 +25,12 @@ class UsersController < ApplicationController
   end
 
   def confirm
-    # @user = User.new
-    # @user.name = params[:user][:name]
-    # @user.email = params[:user][:email]
+    @user = User.new
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+
   end
 
 end

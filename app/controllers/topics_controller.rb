@@ -5,10 +5,13 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.all
+    # topic_count added by the discretion of Jeff
+    @topic_count = 0
   end
 
   def show
     @topic = Topic.find(params[:id])
+    @post_count = 0
   end
 
   def new

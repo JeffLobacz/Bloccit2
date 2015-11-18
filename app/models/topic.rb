@@ -3,8 +3,7 @@ class Topic < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
-  # The following default_scope was added by Jeff for testing purposes
-  # default_scope { order('created_at DESC') }
+  scope :visible_to, -> (user) { user ? all : where(public: true) }
 
   validates :name, length: { minimum: 5 }, presence: true
   validates :description, length: { minimum: 15 }, presence: true

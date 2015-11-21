@@ -106,7 +106,6 @@ RSpec.describe TopicsController, type: :controller do
         expect(assigns(:topics)).to eq([my_topic, my_private_topic])
       end
 
-
     end
 
     describe "GET show" do
@@ -181,6 +180,7 @@ RSpec.describe TopicsController, type: :controller do
         get :index
         expect(assigns(:topics)).to eq([my_topic, my_private_topic])
       end
+      
     end
 
     describe "GET show" do

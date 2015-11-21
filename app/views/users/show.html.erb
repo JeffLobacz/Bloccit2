@@ -36,7 +36,7 @@
 
 <h2>Favorites</h2>
 <% if user_has_favorites(@user) %>
-  <%= render @user.favorites.map(&:post) %>
+  <%= render @user.favorited_posts %>
 <% else %>
   <%= "#{@user.name} has not favorited any posts yet." %>
 <% end %>

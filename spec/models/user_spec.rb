@@ -144,6 +144,19 @@ RSpec.describe User, type: :model do
 
   end
 
+  describe "#favorited_posts" do
+    it "returns a collection of favorites for a user" do
+      #favorite the post you have by the user, store the favorite and make sure its returned in the collection when you call the method
+      favorite = user.favorites.where(post: @post).create
+      expect(user.favorited_posts).to_not be_nil
+    end
+
+    it "returns no favorites if a user does not have any" do
+      #don't favorite, call method and expect empty collection.
+      expect(user.favorited_posts.first).to be_nil
+    end
+  end
+
   describe ".avatar_url" do
 
     let(:known_user) { create(:user, email: "blochead@bloc.io") }

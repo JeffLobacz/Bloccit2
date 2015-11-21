@@ -11,5 +11,39 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe UsersHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "#user_has_posts(post)" do
+
+    let(:user) { create(:user) }
+    let(:topic) { create(:topic) }
+    let(:post) { create(:post) }
+    let(:comment) { create(:comment, post: post, user: user) }
+
+
+    it "returns true if user has authored posts" do
+      user_has_posts = user.topic.post.create
+      expect(user_has_posts(user).count).to eq(1)
+    end
+
+    it "returns 'nil' if the user has no posts" do
+      expect(user_has_posts(user).count).to be_nil
+    end
+
+  end
+
 end
+
+  # describe "#user_has_comments(post)" do
+  #
+  #   it "returns true if user has authored comments" do
+  #     user_has_comments = user.posts.comments.create
+  #     expect(user_has_comments(user).count).to eq(>=1)
+  #   end
+  #
+  #   it "returns 'nil' if the user has no posts" do
+  #     expect(user_has_comments(user).count).to be_nil
+  #   end
+  #
+  # end
+
+# end

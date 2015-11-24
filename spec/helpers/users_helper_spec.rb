@@ -12,38 +12,53 @@ require 'rails_helper'
 # end
 RSpec.describe UsersHelper, type: :helper do
 
-  describe "#user_has_posts(post)" do
+  describe "#user_has_posts(user)" do
 
     let(:user) { create(:user) }
-    let(:topic) { create(:topic) }
+    let(:post) { create(:post) }
+
+    it "returns false if the user has no posts" do
+      expect(user_has_posts(user)).to eq(false)
+    end
+
+    it "returns true if user has authored posts" do
+      create(:post, user: user)
+      expect(user_has_posts(user)).to eq(true)
+    end
+
+  end
+
+  describe "#user_has_comments(post)" do
+
+    let(:user) { create(:user) }
     let(:post) { create(:post) }
     let(:comment) { create(:comment, post: post, user: user) }
 
-
-    it "returns true if user has authored posts" do
-      user_has_posts = user.topic.post.create
-      expect(user_has_posts(user).count).to eq(1)
+    it "returns false if the user has no comments" do
+      expect(user_has_comments(user)).to eq(false)
     end
 
-    it "returns 'nil' if the user has no posts" do
-      expect(user_has_posts(user).count).to be_nil
+    it "returns true if user has authored comments" do
+      create(:comment, post: post, user: user)
+      expect(user_has_comments(user)).to eq(true)
+    end
+
+  end
+
+  describe "#user_has_favorites(post)" do
+
+    let(:user) { create(:user) }
+    let(:post) { create(:post) }
+
+    it "returns false if the user has no favorites" do
+      expect(user_has_favorites(user)).to eq(false)
+    end
+
+    it "returns true if user has favorites" do
+      user.favorites.where(post: post).create
+      expect(user_has_favorites(user)).to eq(true)
     end
 
   end
 
 end
-
-  # describe "#user_has_comments(post)" do
-  #
-  #   it "returns true if user has authored comments" do
-  #     user_has_comments = user.posts.comments.create
-  #     expect(user_has_comments(user).count).to eq(>=1)
-  #   end
-  #
-  #   it "returns 'nil' if the user has no posts" do
-  #     expect(user_has_comments(user).count).to be_nil
-  #   end
-  #
-  # end
-
-# end

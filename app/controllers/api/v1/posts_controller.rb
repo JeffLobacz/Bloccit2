@@ -15,42 +15,42 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def update
     post = Post.find(params[:id])
-    #
-    # if topic.update_attributes(topic_params)
-    #   render json: topic.to_json, status: 200
-    # else
-    #   render json: {error: "Topic update failed", status: 400}, status: 400
-    # end
+
+    if post.update_attributes(post_params)
+      render json: post.to_json, status: 200
+    else
+      render json: {error: "Post update failed", status: 400}, status: 400
+    end
 
   end
 
-  # def create
-  #   topic = Topic.new(topic_params)
-  #
-  #   if topic.valid?
-  #     topic.save!
-  #     render json: topic.to_json, status: 201
-  #   else
-  #     render json: {error: "Topic is invalid", status: 400}, status: 400
-  #   end
-  #
-  # end
-  #
-  # def destroy
-  #   topic = Topic.find(params[:id])
-  #
-  #   if topic.destroy
-  #     render json: {message: "Topic destroyed", status: 200}, status: 200
-  #   else
-  #     render json: {error: "Topic destroy failed", status: 400}, status: 400
-  #   end
-  #
-  # end
-  #
-  # private
-  #
-  # def topic_params
-  #   params.require(:topic).permit(:name, :description, :public)
-  # end
+  def create
+    post = Post.new(post_params)
+
+    if post.valid?
+      post.save!
+      render json: post.to_json, status: 201
+    else
+      render json: {error: "Post is invalid", status: 400}, status: 400
+    end
+
+  end
+
+  def destroy
+    post = Post.find(params[:id])
+
+    if Post.destroy
+      render json: {message: "Post destroyed", status: 200}, status: 200
+    else
+      render json: {error: "Post destroy failed", status: 400}, status: 400
+    end
+
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
 
 end

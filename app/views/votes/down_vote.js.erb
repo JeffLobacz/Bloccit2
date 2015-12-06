@@ -1,0 +1,5 @@
+<% if @vote.down_vote? %>
+  $('#vote-' +<% @vote.id %>).down_vote;
+<% else %>
+  $()
+<% end %>

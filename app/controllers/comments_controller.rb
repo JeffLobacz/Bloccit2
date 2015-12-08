@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = "Comment saved successfully."
     else
-      flash[:error] = "Comment failed to save."
+      flash.now[:alert] = "Comment failed to save."
     end
 
     respond_to do |format|
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       flash[:notice] = "Comment was deleted."
     else
-      flash[:error] = "Comment couldn't be deleted. Try again."
+      flash.now[:alert] = "Comment couldn't be deleted. Try again."
     end
 
     respond_to do |format|

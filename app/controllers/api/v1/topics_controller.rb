@@ -66,7 +66,7 @@ class Api::V1::TopicsController < Api::V1::BaseController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:topic_id, :title, :body, :user_id)
   end
 
 

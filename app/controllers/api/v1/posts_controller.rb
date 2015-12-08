@@ -11,6 +11,10 @@ class Api::V1::PostsController < Api::V1::BaseController
   def show
     # topic = Topic.find(params[:id])
     # render json: topic.to_json, status: 200
+    post = Post.find(params[:id])
+    render json: { posts: post, comments: post.comments, votes: post.votes, favorites: post.favorites }
+
+
   end
 
   def update

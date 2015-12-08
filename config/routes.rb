@@ -28,7 +28,7 @@ Rails.application.routes.draw do
         post 'create_post' => 'topics#create_post'
         # resources :posts, only: [:create]
       end
-      resources :posts, only: [:update, :destroy]
+      resources :posts, only: [:update, :destroy, :show]
 
     end
   end

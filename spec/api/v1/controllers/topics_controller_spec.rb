@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::TopicsController, type: :controller do
   let(:my_user) { create(:user) }
   let(:my_topic) { create(:topic) }
+  # let(:my_post) { create(:post) }
 
   context "unauthenticated user" do
 
@@ -80,7 +81,9 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
     before do
       my_user.admin!
       controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
+      @new_user = build(:user)
       @new_topic = build(:topic)
+      @new_post = build(:post)
     end
 
     describe "PUT update" do
@@ -124,11 +127,8 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
 
     describe "POST create_post" do
 
-      before do
-        @new_post = build(:post)
-        post :create_post, topic_id: my_topic.id, post: {title: @new_post.title, body: @new_post.body}
-      end
-      
+      before { post :create_post, id: my_topic.id, post: {topic_id: my_topic.id, title: @new_post.title, body: @new_post.body, user: my_user.id} }
+
       it "returns http success" do
         expect(response).to have_http_status(:success)
       end
@@ -139,8 +139,8 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
 
       it "creates a post with the correct attributes" do
         hashed_json = JSON.parse(response.body)
-        expect(@new_post.title).to eq hashed_json["title"]
-        expect(@new_post.body).to eq hashed_json["body"]
+        expect(my_post.title).to eq hashed_json["title"]
+        expect(my_post.body).to eq hashed_json["body"]
       end
 
     end

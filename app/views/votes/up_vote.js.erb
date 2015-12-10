@@ -1,5 +1,3 @@
-<% if @vote.up_vote? %>
-  $('#vote-' +<% @vote.id %>).up_vote;
-<% else %>
-  $()
+<% if @vote.valid? %>
+  $('#votes-posts-' +<%= @post.id %>).html("<%= @post.points %>");
 <% end %>
